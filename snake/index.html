@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>贪吃蛇游戏</title>
-    <link rel="stylesheet" href="./snake.css">
+    <link rel="stylesheet" href="./snake.css?t=20230424">
 </head>
 
 <body>
@@ -34,12 +34,12 @@
         </div>
     </div>
     <div class="btn-group">
-        <div class="up" onclick="btnClick('ArrowUp')">上</div>
+        <button class="up" onclick="btnClick('ArrowUp')">上</button>
         <div class="left-right">
-            <div class="left" onclick="btnClick('ArrowLeft')">左</div>
-            <div class="right" onclick="btnClick('ArrowRight')">右</div>
+            <button class="left" onclick="btnClick('ArrowLeft')">左</button>
+            <button class="right" onclick="btnClick('ArrowRight')">右</button>
         </div>
-        <div class="down" onclick="btnClick('ArrowDown')">下</div>
+        <button class="down" onclick="btnClick('ArrowDown')">下</button>
     </div>
 </body>
 <script>
