@@ -33,7 +33,14 @@
             </div>
         </div>
     </div>
-    <div class="btn-group"></div>
+    <div class="btn-group">
+        <div class="up" onclick="btnClick('ArrowUp')">up</div>
+        <div class="left-right">
+            <div class="left" onclick="btnClick('ArrowLeft')">left</div>
+            <div class="right" onclick="btnClick('ArrowRight')">right</div>
+        </div>
+        <div class="down" onclick="btnClick('ArrowDown')">down</div>
+    </div>
 </body>
 <script>
     // 食物类
@@ -190,10 +197,13 @@
         // 键盘按下的响应
         keydownHandle(e) {
             const key = e.key
-            // 检查e.key的值是否合法
+            this.changeDirection(key)
+        }
+        changeDirection(key){
+            // 检查key的值是否合法
             if(key=="ArrowRight" || key=="ArrowLeft" || key=="ArrowUp" || key=="ArrowDown") {
                 if(!this.snake.bodies[1]){
-                    this.direction = e.key
+                    this.direction = key
                 } else {
                     if(this.direction == 'ArrowLeft' && key == 'ArrowRight') {
                     } else if (this.direction == 'ArrowRight' && key == 'ArrowLeft') {
@@ -206,7 +216,6 @@
             } else {
                 console.log('按键不合法')
             }
-            
         }
         // 蛇的移动
         run() {
@@ -257,7 +266,10 @@
 
 
     const gc = new GameControl(400)
-
+    // 响应按钮点击
+    function btnClick(key){
+        gc.changeDirection(key)
+    }
 </script>
 
 </html>

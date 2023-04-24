@@ -14,7 +14,7 @@ body {
     width: 360px;
     height: 420px;
     background-color: @bg-color;
-    margin: 50px auto 0;
+    margin: 30px auto 0;
     border: 8px solid black;
     border-radius: 40px;
     display: flex;
@@ -69,8 +69,29 @@ body {
 }
 .btn-group{
     width: 360px;
-    height: 100px;
     margin: 20px auto 0;
     box-sizing: border-box;
-    border: 1px solid #ccc;
+    .up{
+        text-align: center;
+        line-height: 60px;
+        border: 1px solid #ccc;
+    }
+    .left-right{
+        display: flex;
+        margin: 5px 0;
+        .left,.right{
+            flex: 1;
+            text-align: center;
+            line-height: 80px;
+            border: 1px solid #ccc;
+        }
+        .left{
+            margin-right: 5px;
+        }
+    }
+    .down{
+        text-align: center;
+        line-height: 60px;
+        border: 1px solid #ccc;
+    }
 }
