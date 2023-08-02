@@ -24,6 +24,13 @@
       --color1: #d9ecff;
       --color2: #e1f3d8;
       --color3: #faecd8;
+      --mywidth: 300px;
+    }
+
+    @media (max-width: 800px) {
+      :root {
+        --mywidth: 100px;
+      }
     }
   </style>
 </head>
@@ -34,7 +41,7 @@
     <style>
       .layout.float .left {
         float: left;
-        width: 300px;
+        width: var(--mywidth);
         background: var(--color1);
       }
 
@@ -44,7 +51,7 @@
 
       .layout.float .right {
         float: right;
-        width: 300px;
+        width: var(--mywidth);
         background: var(--color3);
       }
     </style>
@@ -68,19 +75,19 @@
 
       .layout.absolute .left {
         left: 0;
-        width: 300px;
+        width: var(--mywidth);
         background: var(--color1);
       }
 
       .layout.absolute .center {
-        left: 300px;
-        right: 300px;
+        left: var(--mywidth);
+        right: var(--mywidth);
         background: var(--color2);
       }
 
       .layout.absolute .right {
         right: 0;
-        width: 300px;
+        width: var(--mywidth);
         background: var(--color3);
       }
     </style>
@@ -106,7 +113,7 @@
       }
 
       .layout.flexbox .left {
-        width: 300px;
+        width: var(--mywidth);
         background: var(--color1);
       }
 
@@ -116,7 +123,7 @@
       }
 
       .layout.flexbox .right {
-        width: 300px;
+        width: var(--mywidth);
         background: var(--color3);
       }
     </style>
@@ -144,7 +151,7 @@
       }
 
       .layout.table .left {
-        width: 300px;
+        width: var(--mywidth);
         background: var(--color1);
       }
 
@@ -153,7 +160,7 @@
       }
 
       .layout.table .right {
-        width: 300px;
+        width: var(--mywidth);
         background: var(--color3);
       }
     </style>
@@ -174,7 +181,7 @@
         display: grid;
         width: 100%;
         grid-template-rows: 100px;
-        grid-template-columns: 300px auto 300px;
+        grid-template-columns: var(--mywidth) auto var(--mywidth);
       }
 
       .layout.grid .left {
