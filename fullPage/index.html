@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    #all {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      transition: top 1s;
+    }
+
+    .item {
+      height: 100vh;
+    }
+
+    .item img {
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+    }
+  </style>
+</head>
+
+<body>
+  <div onmousewheel="mousewheelHandle(event)" id="all">
+    <div class="item">
+      <img src="https://ys.mihoyo.com/main/_nuxt/img/5c125a1.png" alt="">
+    </div>
+    <div class="item">
+      <img src="https://uploadstatic.mihoyo.com/contentweb/20200319/2020031921550320292.jpg" alt="">
+    </div>
+    <div class="item">
+      <img src="https://uploadstatic.mihoyo.com/contentweb/20200319/2020031921552395638.jpg" alt="">
+    </div>
+    <div class="item">
+      <img src="https://uploadstatic.mihoyo.com/contentweb/20210719/2021071918001232800.jpg" alt="">
+    </div>
+    <div class="item">
+      <img
+        src="https://webstatic.mihoyo.com/upload/contentweb/2022/08/15/8969f683b92839ac427c875d0d742be2_4825576482548821743.jpg"
+        alt="">
+    </div>
+  </div>
+</body>
+<!-- <script src="https://unpkg.com/vconsole@latest/dist/vconsole.min.js"></script> -->
+<script>
+  // var vConsole = new window.VConsole();
+  // 获取节点
+  const allWrapper = document.getElementById('all')
+  // 图片总数
+  const picLength = allWrapper.querySelectorAll('.item').length
+  allWrapper.style.height = picLength * 100 + 'vh'
+  // 计数--第几张图片
+  let index = 1;
+  // 滚动事件
+  function mousewheelHandle(e) {
+    throttleHandle(e.wheelDeltaY)
+  }
+  // 移动端touch
+  let start
+  allWrapper.addEventListener('touchstart', function (e) {
+    console.log('touchstart')
+    e.preventDefault()
+    start = e.touches[0]?.pageY || e.changedTouches[0]?.pageY
+  })
+  let end
+  allWrapper.addEventListener('touchend', function (ev) {
+    ev.preventDefault()
+    end = ev.touches[0]?.pageY || ev.changedTouches[0]?.pageY
+    const distance = start - end
+    if (distance > 50 || distance < -50) {
+      move(-distance)
+    }
+  })
+
+  function move(value) {
+    // 向下
+    if (value < 0 && index < picLength) {
+      index += 1
+    } // 向上
+    else if (value > 0 && index > 1) {
+      index -= 1
+    }
+    allWrapper.style.top = '-100' * (index - 1) + 'vh';
+  }
+  const throttleHandle = throttle(move, 1000)
+  // 节流函数
+  function throttle(fn, delay) {
+    let args = arguments,
+      context = this,
+      timer = null,
+      remaining = 0,
+      previous = new Date();
+
+    return function (ttt) {
+      let now = new Date();
+      let args = arguments
+      remaining = now - previous;
+
+      if (remaining >= delay) {
+        if (timer) {
+          clearTimeout(timer);
+        }
+
+        fn.apply(context, args);
+        previous = now;
+      } else {
+        if (!timer) {
+          timer = setTimeout(function () {
+            fn.apply(context, args);
+            previous = new Date();
+          }, delay - remaining);
+        }
+      }
+    };
+  }
+</script>
+
+</html>
