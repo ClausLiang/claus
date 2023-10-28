@@ -38,14 +38,16 @@ const camera = new THREE.PerspectiveCamera(
   0.1,
   1000
 );
+// 移动相机位置
+camera.position.set(0, 20, 20);
+// 设置相机看向原点的方向
+camera.lookAt(0, 0, 0);
+
 // 4. 创建物体
+// 创建坐标轴
 const axis = new THREE.AxesHelper(5);
 scene.add(axis);
 
-// 移动相机位置
-camera.position.set(5, 5, 10);
-// 设置相机看向原点的方向
-camera.lookAt(0, 0, 0);
 
 // 添加立方体
 const geometry = new THREE.BoxGeometry(4, 4, 4);
@@ -56,30 +58,29 @@ const material = new THREE.MeshStandardMaterial({ color: 0xff0000 });
 const cube = new THREE.Mesh(geometry, material);
 scene.add(cube);
 
-// 添加一个白色透明度为0.4的环境光
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
-scene.add(ambientLight);
-
-// 添加一个白色的方向光，方向光从(10, 5, 10)照向原点
-const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-directionalLight.position.set(10, 5, 10);
-scene.add(directionalLight);
-
 // 5. 渲染
 // renderer.render(scene, camera);
-
 function animate() {
   requestAnimationFrame(animate);
   cube.rotation.y += 0.01;
   renderer.render(scene, camera);
 }
-
 animate();
 
 // 添加交互
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.update();
+
+// 光源
+// 添加一个白色透明度为0.4的环境光
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
+scene.add(ambientLight);
+
+// 添加一个白色的方向光（平行光），方向光从(10, 5, 10)照向原点
+const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+directionalLight.position.set(10, 5, 10); 
+scene.add(directionalLight);
 
 // 阴影
 // 1. 渲染器能够渲染阴影效果
