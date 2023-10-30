@@ -106,6 +106,10 @@ const directionalLightHelper = new THREE.DirectionalLightHelper(
 scene.add(directionalLightHelper); // 辅助线
 
 
-
+window.onresize = function(){
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix()
+}
 </script>
 </html>
