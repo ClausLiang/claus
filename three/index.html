@@ -67,30 +67,30 @@ function animate() {
 }
 animate();
 
-// 添加交互
+// 6.添加交互
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.update();
 
-// 光源
-// 添加一个白色透明度为0.4的环境光
+// 7.添加光源
+// 7.1添加一个白色透明度为0.4的环境光
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
 scene.add(ambientLight);
 
-// 添加一个白色的方向光（平行光），方向光从(10, 5, 10)照向原点
+// 7.2添加一个白色的方向光（平行光），方向光从(10, 5, 10)照向原点
 const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
 directionalLight.position.set(10, 5, 10); 
 scene.add(directionalLight);
 
-// 阴影
-// 1. 渲染器能够渲染阴影效果
+// 8.阴影
+// 8.1. 渲染器能够渲染阴影效果
 renderer.shadowMap.enabled = true;
-// 2. 该方向会投射阴影效果
+// 8.2. 该方向会投射阴影效果
 directionalLight.castShadow = true;
-// 3. cube.castShadow = true, 表示该立方体会产生影像效果；
+// 8.3. cube.castShadow = true, 表示该立方体会产生影像效果；
 cube.castShadow = true;
 
-// 4. 新建了一个平面，该平面能够接受投射过来的阴影效果
+// 8.4. 新建了一个平面，该平面能够接受投射过来的阴影效果
 const planeGeometry = new THREE.PlaneGeometry(20, 20);
 const planeMaterial = new THREE.MeshStandardMaterial({ color: 0xffffff });
 const planeMesh = new THREE.Mesh(planeGeometry, planeMaterial);
@@ -99,13 +99,13 @@ planeMesh.position.set(0, -3, 0);
 planeMesh.receiveShadow = true;
 scene.add(planeMesh);
 
-// 5. 方向光的辅助线
+// 8.5. 方向光的辅助线
 const directionalLightHelper = new THREE.DirectionalLightHelper(
   directionalLight
 );
 scene.add(directionalLightHelper); // 辅助线
 
-
+// 9. 浏览器缩放
 window.onresize = function(){
   renderer.setSize(window.innerWidth, window.innerHeight);
   camera.aspect = window.innerWidth / window.innerHeight;
