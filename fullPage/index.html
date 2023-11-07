@@ -1,3 +1,4 @@
+<!-- pc端监听鼠标事件，移动端监听touch事件，滑动的时候利用js让页面滚动到相应的位置 -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -162,11 +163,12 @@
   allWrapper.style.height = picLength * 100 + 'vh'
   // 计数--第几张图片
   let index = 1;
-  // pc滚动事件
+  // pc滚动事件： 通过dom绑定的onmousewheel，监听鼠标的滚动事件，并且需要做一下节流处理
   function mousewheelHandle(e) {
     throttleHandle(e.wheelDeltaY)
   }
   // 移动端touch
+  // 移动端的实现需要借助监听touchstart和touchend两个事件，两个点相减得到的距离正负判断是向上还是向下滑动
   let start, end
   allWrapper.addEventListener('touchstart', function (e) {
     console.log('touchstart')
@@ -191,8 +193,10 @@
     else if (value > 0 && index > 1) {
       index -= 1
     }
+    // nav导航指示器的样式修改
     navItems.forEach(item=>item.className = 'nav-item')
     navItems[index-1].className = 'nav-item nav-item--active'
+    // 页面滚动
     allWrapper.style.top = '-100' * (index - 1) + 'vh';
   }
   // 点击跳转到对应位置
