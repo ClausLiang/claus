@@ -89,29 +89,8 @@ const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
 directionalLight.position.set(20, 10, 20); 
 scene.add(directionalLight);
 
-// 8.添加阴影
-// 8.1. 渲染器能够渲染阴影效果
-renderer.shadowMap.enabled = true;
-// 8.2. 该方向会投射阴影效果
-directionalLight.castShadow = true;
-// 8.3. cube.castShadow = true, 表示该立方体会产生影像效果；
-// cube.castShadow = true;
-
-// 8.4. 新建了一个平面，该平面能够接受投射过来的阴影效果
-// const planeGeometry = new THREE.PlaneGeometry(100, 100);
-// const planeMaterial = new THREE.MeshStandardMaterial({ color: 0xffffff });
-// const planeMesh = new THREE.Mesh(planeGeometry, planeMaterial);
-// planeMesh.rotation.x = -0.5 * Math.PI;
-// planeMesh.position.set(0, 0, -30);
-// planeMesh.receiveShadow = true;
-// scene.add(planeMesh);
 
 
-// 8.5. 方向光的辅助线
-// const directionalLightHelper = new THREE.DirectionalLightHelper(
-//   directionalLight
-// );
-// scene.add(directionalLightHelper); // 辅助线
 
 // 9. 浏览器缩放
 window.onresize = function(){
