@@ -83,11 +83,20 @@ const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
 directionalLight.position.set(10, 5, 10); 
 scene.add(directionalLight);
 
-// 7.3. 方向光的辅助线
+// 方向光的辅助线
 const directionalLightHelper = new THREE.DirectionalLightHelper(
   directionalLight
 );
-scene.add(directionalLightHelper); // 辅助线
+scene.add(directionalLightHelper);
+
+// 7.3 点光源(颜色，光照强度，光源照射的最大距离，沿着关照距离的衰变量)
+const pointLight = new THREE.PointLight(0xffffff, 1000, 100, 2)
+pointLight.position.set( 10, 10, 5 );
+scene.add(pointLight);
+// 辅助线
+const sphereSize = 1;
+const pointLightHelper = new THREE.PointLightHelper( pointLight, sphereSize );
+scene.add( pointLightHelper );
 
 // 8.阴影
 // 8.1. 渲染器能够渲染阴影效果
