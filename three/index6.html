@@ -50,50 +50,17 @@ camera.lookAt(0, 0, 0);
 const axis = new THREE.AxesHelper(20);
 scene.add(axis);
 
-// 创建一个空的几何体对象
-// bufferGeometry是基础类，boxGeometry立方体、sphereGeometry球体等几何体都是基于bufferGeometry构建的。
-const geometry = new THREE.BufferGeometry(); 
-// 类型化数组创建顶点数据
-const vertices = new Float32Array([
-  0, 0, 0, // 顶点1坐标
-  10, 0, 0,
-  10, 10, 0,
-  0,10,0,
-  5,5,15,
-]);
-// 创建属性缓冲区对象
-// 3个为一组，表示一个顶点的xyz坐标
-const attribue = new THREE.BufferAttribute(vertices, 3); 
-// 设置几何体attributes属性的位置属性
-geometry.attributes.position = attribue;
-
-// 类型化数组创建顶点数据
-const indexs = new Uint16Array([
-  0,1,2,
-  0,2,3,
-  0,1,4,
-  0,3,4,
-  1,2,4,
-  2,3,4,
-])
-geometry.index = new THREE.BufferAttribute(indexs,1)
-
-//^^^^^^^^^^^^^^^^^^^^^以上是定义几何体^^^^^^^^^^^^^^^^^^
-
-
-// 面--材质对象
-// 用网格模型mesh渲染自定义的几何体
-const material3 = new THREE.MeshLambertMaterial({
+// 材质
+const material = new THREE.MeshLambertMaterial({
   color: 0x00ffff,
-  wireframe:true,//线条模式渲染mesh对应的三角形数据
+  wireframe:true,// wireframe：线条模式渲染mesh对应的三角形数据
   side: THREE.DoubleSide // 双面能看 默认正面能看FrontSide 还有一个背面能看BackSide
 });
+ // 球体的细分数，默认32 16
+const geometry = new THREE.SphereGeometry(10, 32, 16)
 
-const geometry2 = new THREE.SphereGeometry(10, 32, 16)
-
-const mesh = new THREE.Mesh(geometry2, material3)
+const mesh = new THREE.Mesh(geometry, material)
 scene.add(mesh);
-
 
 
 // 5. 渲染
@@ -113,23 +80,15 @@ controls.update();
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
 scene.add(ambientLight);
 
+// 点光源
 const pointLight = new THREE.PointLight(0xffffff, 100, 100, 2)
 pointLight.position.set( 10, 10, 5 );
 scene.add(pointLight);
+// 点光源辅助线
 const sphereSize = 1;
 const pointLightHelper = new THREE.PointLightHelper( pointLight, sphereSize );
 scene.add( pointLightHelper );
 
-// 7.2添加一个白色的方向光（平行光），方向光从(10, 5, 10)照向原点
-// const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-// directionalLight.position.set(50, 25, 50); 
-// scene.add(directionalLight);
-
-// 方向光的辅助线
-// const directionalLightHelper = new THREE.DirectionalLightHelper(
-//   directionalLight
-// );
-// scene.add(directionalLightHelper);
 
 // 9. 浏览器缩放
 window.onresize = function(){

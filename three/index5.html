@@ -53,7 +53,8 @@
   const axis = new THREE.AxesHelper(20);
   scene.add(axis);
 
-  // 创建一个空的几何体对象
+  // vvvvvvvvvvvvvvvvvvv创建一个空的几何体对象vvvvvvvvvvvvvvvvvvvvvvvv
+  
   // bufferGeometry是基础类，boxGeometry立方体、sphereGeometry球体等几何体都是基于bufferGeometry构建的。
   const geometry = new THREE.BufferGeometry();
   // 类型化数组创建顶点数据
@@ -97,12 +98,12 @@
 
 
   // 面--材质对象
-  // 用网格模型mesh渲染自定义的几何体
-  const material3 = new THREE.MeshLambertMaterial({
+  const material = new THREE.MeshLambertMaterial({
     color: 0x00ffff,
     side: THREE.DoubleSide // 双面能看 默认正面能看FrontSide 还有一个背面能看BackSide
   });
-  const mesh = new THREE.Mesh(geometry, material3)
+  // 用网格模型mesh渲染自定义的几何体
+  const mesh = new THREE.Mesh(geometry, material)
 
   scene.add(mesh);
 
@@ -129,6 +130,7 @@
   const pointLight = new THREE.PointLight(0xffffff, 200, 100, 2)
   pointLight.position.set(10, 10, 5);
   scene.add(pointLight);
+  // 点光源辅助线
   const sphereSize = 1;
   const pointLightHelper = new THREE.PointLightHelper(pointLight, sphereSize);
   scene.add(pointLightHelper);

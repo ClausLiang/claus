@@ -110,7 +110,7 @@ cube.castShadow = true;
 const planeGeometry = new THREE.PlaneGeometry(20, 20);
 const planeMaterial = new THREE.MeshStandardMaterial({ color: 0xffffff, side: THREE.DoubleSide });
 const planeMesh = new THREE.Mesh(planeGeometry, planeMaterial);
-planeMesh.rotation.x = -0.5 * Math.PI;
+planeMesh.rotation.x = -0.5 * Math.PI; // PI代表180度。
 planeMesh.position.set(0, -3, 0);
 planeMesh.receiveShadow = true;
 scene.add(planeMesh);
