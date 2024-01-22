@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .item {
+      --progress: 0;
+      display: flex;
+      opacity: var(--progress);
+      transform: scale(calc(1.8 - (0.8 * var(--progress)))) translateY(calc(-60px * (1 - var(--progress))));
+    }
+    h1{
+      text-align: center;
+      font-size: 50px;
+    }
+    .item > div{
+      flex: 1;
+    }
+  </style>
+</head>
+
+<body>
+  <div style="height: 1000px;"></div>
+  <div style="border: 1px solid rebeccapurple" class="container">
+    <div class="item">
+      <div><h1>崔</h1></div>
+      <div></div>
+    </div>
+    <div class="item">
+      <div></div>
+      <div><h1>大</h1></div>
+    </div>
+    <div class="item">
+      <div><h1>人</h1></div>
+      <div></div>
+    </div>
+  </div>
+  <div style="height: 1600px;"></div>
+</body>
+<script>
+  //获取父元素
+  let parentElement = document.querySelector('.container');
+  //元素距离页面高度
+  let offsetTop = parentElement.offsetTop
+  //元素底部距离页面高度，也就是顶部加上元素的高度。
+  let offsetHeight = offsetTop + parentElement.offsetHeight
+
+  let liElements = document.querySelectorAll('.item')
+
+  window.addEventListener('scroll', () => {
+    // 已滚动高度
+    let htmlScrollTop = document.documentElement.scrollTop + document.documentElement.clientHeight
+    if (htmlScrollTop >= offsetTop && htmlScrollTop <= offsetHeight) {
+      let scrolled = (htmlScrollTop - offsetTop) / parentElement.offsetHeight
+      
+      let total = 1 / liElements.length
+      for (let index = 0; index < liElements.length; index++) {
+        let row = liElements[index]
+        let start = total * index
+        let end = total * (index + 1)
+        let progress = (scrolled - start) / (end - start)
+        if (progress >= 1) progress = 1
+        if (progress <= 0) progress = 0
+        row.style.setProperty('--progress', progress)
+      }
+    }
+  })
+
+
+</script>
+
+</html>
