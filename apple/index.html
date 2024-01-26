@@ -6,59 +6,88 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <style>
-    .item {
+    /* 动画1 */
+    .animation1{
+      font-size: 30px;
+    }
+    /* 动画2 */
+    .animation2-wrapper{
+      background-color: azure;
+      padding: 20px;
+      overflow: hidden;
+    }
+    .anima2 {
       --progress: 0;
       display: flex;
       opacity: var(--progress);
       transform: scale(calc(1.8 - (0.8 * var(--progress)))) translateY(calc(-60px * (1 - var(--progress))));
     }
-    h1{
+    .anima2 > div{
+      flex: 1;
       text-align: center;
       font-size: 50px;
-    }
-    .item > div{
-      flex: 1;
     }
   </style>
 </head>
 
 <body>
-  <div style="height: 1000px;"></div>
-  <div style="border: 1px solid rebeccapurple" class="container">
-    <div class="item">
-      <div><h1>崔</h1></div>
+  <div style="height: 50vh;"></div>
+  <div class="animation1">这是一个二级标题这是一个二级标题这是一个二级标题这是一个二级标题这是一个二级标题这是一个二级标题这是一个二级标题</div>
+  <div class="animation1">这是一个二级标题这是一个二级标题这是一个二级标题</div>
+  <div class="animation1">这是一个二级标题这是一个二级标题这是一个二级标题</div>
+  <div class="animation1">这是一个二级标题这是一个二级标题这是一个二级标题</div>
+  <div class="animation2-wrapper">
+    <div class="anima2">
+      <div>自由</div>
       <div></div>
     </div>
-    <div class="item">
+    <div class="anima2">
       <div></div>
-      <div><h1>大</h1></div>
+      <div>民主</div>
     </div>
-    <div class="item">
-      <div><h1>人</h1></div>
+    <div class="anima2">
+      <div>自强</div>
       <div></div>
     </div>
   </div>
   <div style="height: 1600px;"></div>
 </body>
 <script>
+  // ----------------------------动画1
+  let animation1 = document.querySelectorAll('.animation1')
+  // 视窗高度
+  let clientHeight = document.documentElement.clientHeight
+  // 开始动画的位置
+  let animPosition = clientHeight/2 - 100
+
+  // ----------------------------动画2
   //获取父元素
-  let parentElement = document.querySelector('.container');
-  //元素距离页面高度
-  let offsetTop = parentElement.offsetTop
-  //元素底部距离页面高度，也就是顶部加上元素的高度。
-  let offsetHeight = offsetTop + parentElement.offsetHeight
-
-  let liElements = document.querySelectorAll('.item')
-
+  let anima2Wrapper = document.querySelector('.animation2-wrapper');
+  
+  let a2List = document.querySelectorAll('.anima2')
+  
   window.addEventListener('scroll', () => {
-    // 已滚动高度
-    let htmlScrollTop = document.documentElement.scrollTop + document.documentElement.clientHeight
-    if (htmlScrollTop >= offsetTop && htmlScrollTop <= offsetHeight) {
-      let scrolled = (htmlScrollTop - offsetTop) / parentElement.offsetHeight
+    // ---------------------------第一个动画效果
+    for(let i=0; i<animation1.length;i++){
+      if(animation1[i].getBoundingClientRect().top > animPosition - animation1[i].offsetHeight
+      && animation1[i].getBoundingClientRect().top < animPosition){
+        animation1[i].style.color = 'red'
+      } else {
+        animation1[i].style.color = '#000'
+      }
+    }
+    
+    // ----------------------------第二个动画
+    // 距离视窗高度
+    let a2WrapperTop = anima2Wrapper.getBoundingClientRect().top;
+    if (a2WrapperTop <= animPosition
+      && a2WrapperTop >= animPosition-anima2Wrapper.offsetHeight
+    ) {
+      let scrolled = (animPosition - a2WrapperTop) / anima2Wrapper.offsetHeight
       
-      let total = 1 / liElements.length
-      for (let index = 0; index < liElements.length; index++) {
-        let row = liElements[index]
+      let total = 1 / a2List.length
+      for (let index = 0; index < a2List.length; index++) {
+        let row = a2List[index]
         let start = total * index
         let end = total * (index + 1)
         let progress = (scrolled - start) / (end - start)
