@@ -4,8 +4,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>一个动画</title>
   <style>
+    .tip{
+      background-color: rgba(255,0,0,0.2);
+      position: fixed;
+      height: 1px;
+      left: 0;
+      right: 0;
+      top: 0;
+    }
     /* 动画1 */
     .animation1{
       font-size: 30px;
@@ -31,6 +39,7 @@
 </head>
 
 <body>
+  <div class="tip"></div>
   <div style="height: 50vh;"></div>
   <div class="animation1">这是一个二级标题这是一个二级标题这是一个二级标题这是一个二级标题这是一个二级标题这是一个二级标题这是一个二级标题</div>
   <div class="animation1">这是一个二级标题这是一个二级标题这是一个二级标题</div>
@@ -58,6 +67,8 @@
   // 开始动画的位置
   let animPosition = clientHeight/2 - 100
 
+  document.querySelector('.tip').style.top = animPosition+'px'
+
   // ----------------------------动画1
   // 要移动的
   let a1List = document.querySelectorAll('.animation1')
@@ -82,8 +93,8 @@
   function animation2fn(){
     // 距离视窗高度
     let a2WrapperTop = anima2Wrapper.getBoundingClientRect().top;
-    if (a2WrapperTop <= animPosition
-      && a2WrapperTop >= animPosition-anima2Wrapper.offsetHeight
+    if (a2WrapperTop <= animPosition + 100
+      && a2WrapperTop >= animPosition-anima2Wrapper.offsetHeight-100
     ) {
       let scrolled = (animPosition - a2WrapperTop) / anima2Wrapper.offsetHeight
       
